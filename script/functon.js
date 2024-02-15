@@ -28,6 +28,18 @@ function addBackgroundColor(elementId) {
     bgColor.classList.add('bg-orange-400');
 }
 
+function getElementValueById(elementId){
+    const element = document.getElementById(elementId);
+    const elementText = element.innerText;
+    const value = parseInt(elementText);
+    return value;
+}
+
+function setElementValueById(elementId, value){
+    const element = document.getElementById(elementId);
+    element.innerText = value;
+}
+
 function handleKeyboardButtonPress(event) {
     const playerPressed = event.key;
     const screenAlphabet = document.getElementById('screen-alphabet');
@@ -38,20 +50,15 @@ function handleKeyboardButtonPress(event) {
         playGroundFunction();
         removeBackGroundColor(currentAlphabet);
 
-        const currentScore = document.getElementById('current-score');
-        const currentScoreText = currentScore.innerText;
-        const currentScoreValue = parseInt(currentScoreText);
+        const currentScore =  getElementValueById('current-score');
+        const updatedScore = currentScore + 1;
+        setElementValueById('current-score', updatedScore);
 
-        const increaseCurrentScore = currentScoreValue + 1;
-        currentScore.innerText = increaseCurrentScore;
     }
     else {
-        const currentLife = document.getElementById('current-life');
-        const currentLifeText = currentLife.innerText;
-        const currentLifeTextValue = parseInt(currentLifeText);
-
-        const reduceCurrentLife = currentLifeTextValue -1;
-        currentLife.innerText = reduceCurrentLife;
+        const currentLife = getElementValueById('current-life');
+        const updatedScore = currentLife - 1;
+        setElementValueById('current-life', updatedScore);
     }
 }
 document.addEventListener('keyup', handleKeyboardButtonPress)
