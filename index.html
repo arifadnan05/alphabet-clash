@@ -99,11 +99,11 @@
 
         </div>
         <!-- score and play again area -->
-        <section class="hidden">
+        <section id="final-score" class="hidden">
             <div class="flex justify-center items-center min-h-screen">
                 <div class="bg-purple-600 w-1/4 h-52 flex flex-col justify-center items-center gap-5 rounded-3xl">
-                    <h1 class="text-6xl text-white font-extrabold">Score: 14</h1>
-                    <button class="btn px-12">Play Now</button>
+                    <h1 id="total-score" class="text-6xl text-white font-extrabold">Score: 14</h1>
+                    <button onclick="gameOver()" class="btn px-12">Play Again</button>
                     <p class="text-xl text-white">Practice will make you pro</p>
                 </div>
             </div>

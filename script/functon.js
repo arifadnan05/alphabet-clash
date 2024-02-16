@@ -1,11 +1,15 @@
-function playAgain() {
-    const playNow = document.getElementById('home');
+function playAgain(elementId) {
+    const playNow = document.getElementById(elementId);
     playNow.classList.add('hidden');
 }
 
+function addClassList(elementId){
+    const element = document.getElementById(elementId);
+    element.classList.remove('hidden');
+}
+
 function playGroundFunction() {
-    const playground = document.getElementById('playground');
-    playground.classList.remove('hidden');
+    addClassList('playground');
     const randomAlphabet = 'abcdefghijklmnopqrstwxyz';
     const arrayAlphabet = randomAlphabet.split('');
 
@@ -35,9 +39,22 @@ function getElementValueById(elementId){
     return value;
 }
 
+function finalScore(elementId) {
+    const finalScore = document.getElementById(elementId);
+    finalScore.classList.remove('hidden');
+}
+
 function setElementValueById(elementId, value){
     const element = document.getElementById(elementId);
     element.innerText = value;
+}
+
+
+function gameOver() {
+    playGroundFunction('playground');
+    playAgain('final-score');
+    setElementValueById('current-life', 5)
+    setElementValueById('current-score', 0)
 }
 
 function handleKeyboardButtonPress(event) {
@@ -59,11 +76,23 @@ function handleKeyboardButtonPress(event) {
         const currentLife = getElementValueById('current-life');
         const updatedScore = currentLife - 1;
         setElementValueById('current-life', updatedScore);
+
+
+        if(updatedScore === 0){
+            finalScore('final-score');
+            const totalScore = document.getElementById('current-score')
+            const totalScoreValue = totalScore.innerText;
+            setElementValueById('total-score', totalScoreValue);
+            const currentScreenAlphabet = document.getElementById('screen-alphabet').innerText;
+            removeBackGroundColor(currentScreenAlphabet);
+            playAgain('playground');
+            
+        }
     }
 }
-document.addEventListener('keyup', handleKeyboardButtonPress)
+document.addEventListener('keyup', handleKeyboardButtonPress);
 
 function play() {
-    playAgain()
+    playAgain('home')
     playGroundFunction()
 }
